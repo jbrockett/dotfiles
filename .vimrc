@@ -52,6 +52,7 @@ if has("statusline") && !&cp
 endif
 
 " Mappings
+:imap jk <Esc>
 nnoremap <C-n> :NERDTreeToggle<cr>                      " open nerdtree with ctrl-n
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')   " handle wrapped lines
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
