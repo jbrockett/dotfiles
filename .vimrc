@@ -51,12 +51,16 @@ if has("statusline") && !&cp
   set statusline+=[%b][0x%B]
 endif
 
-" Mappings
+" Mappings - Do not use same line comments, as it causes issues with the mappings
+" Map jk to esc as some keyboards lack the esc key now :(
 imap jk <Esc>
-nnoremap <C-n> :NERDTreeToggle<cr>                      " open nerdtree with ctrl-n
-noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')   " handle wrapped lines
+" open nerdtree with ctrl-n
+nnoremap <C-n> :NERDTreeToggle<cr>
+" handle wrapped lines
+noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
-cmap w!! w !sudo tee % >/dev/null                       " save as sudo
+" save as sudo
+cmap w!! w !sudo tee % >/dev/null
 
 " Add Plugins - vim-plug
 call plug#begin('~/.vim/plugged')
