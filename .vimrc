@@ -68,6 +68,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-eunuch'
@@ -79,6 +80,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
 Plug 'ekalinin/Dockerfile.vim', {'for': 'Dockerfile'}
 Plug 'pearofducks/ansible-vim', {'for': 'ansible'}
 "Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'hashivim/vim-terraform', {'for': 'terraform'}
 
 call plug#end()
 
@@ -90,9 +92,10 @@ let g:syntastic_ansible_checkers = ["ansible-lint"]
 "let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 "let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 "let g:go_fmt_fail_silently = 0
+let g:terraform_align=1
 
 " Solarized options
-set background=dark
-let g:solarized_visibility = "high"
-let g:solarized_contrast = "high"
-colorscheme solarized
+"set background=dark
+"let g:solarized_visibility = "high"
+"let g:solarized_contrast = "high"
+"colorscheme solarized
