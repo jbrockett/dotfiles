@@ -3,6 +3,7 @@
 "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " Basic settings
+set encoding=UTF-8
 set number                        " Show line numbers
 set relativenumber
 set ruler                         " Show line and column number
