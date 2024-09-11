@@ -3,8 +3,10 @@
 {
   programs.zsh = {
     autosuggestion.enable = true;
-    defaultKeymap = emacs;
     enable = true;
+    initExtra = ''
+      bindkey -e
+    '';
     shellAliases = {
       ll = "ls -l";
       update = "sudo nixos-rebuild switch";

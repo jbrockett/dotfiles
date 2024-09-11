@@ -1,6 +1,6 @@
 {
   description = "My Nix configuration";
-  
+
   inputs = {
     # Package sources
     nixpkgs.url = "nixpkgs/nixos-24.05";
@@ -16,7 +16,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, flake-utils, home-manager, ... }: 
+  outputs = { self, nixpkgs, nixpkgs-unstable, flake-utils, home-manager, ... }:
   let
     supportedSystems = [
       "aarch64-darwin"
@@ -27,10 +27,22 @@
         pkgs = nixpkgs.legacyPackages.${system};
       in {
         formatter = pkgs.alejandra;
+        overlays = [
+          (final: prev: {
+            porter = final.callPackage ./pkgs/porter { };
+          })
+        ];
         packages.homeConfigurations.jeremy = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
             ./home.nix
+            {
+              nixpkgs.overlays = [
+                (final: prev: {
+                  porter = final.callPackage ./pkgs/porter { };
+                })
+              ];
+            } 
           ];
         };
       }

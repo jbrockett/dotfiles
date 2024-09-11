@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 
 let
   importAll = imports: lib.foldl' lib.concat [ ] (map import imports);
@@ -7,13 +7,15 @@ in
   imports = importAll [
     ./home/modules/cli
     ./home/modules/editors
-    ./pkgs/porter
   ];
 
   home = {
     username = "jeremy";
     homeDirectory = "/Users/jeremy";
     stateVersion = "24.05";
+    packages = with pkgs; [
+      porter
+    ];
   };
 
   news.display = "silent";

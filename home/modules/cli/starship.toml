@@ -7,14 +7,8 @@ $git_branch\
 $git_status\
 $git_metrics\
 $fill\
-$kubernetes\
-$docker_context\
-$golang\
-$helm\
-$nix_shell\
-$aws\
 $cmd_duration\
-$character"""
+\n$character"""
 
 add_newline = true
 
@@ -28,6 +22,9 @@ format = '[$duration](bold yellow)'
 
 [directory]
 truncate_to_repo = true
+
+[fill]
+symbol = ' '
 
 [git_status]
 conflicted = '🏳'
