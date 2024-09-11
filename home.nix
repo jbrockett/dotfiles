@@ -7,6 +7,7 @@ in
   imports = importAll [
     ./home/modules/cli
     ./home/modules/editors
+    ./pkgs/porter
   ];
 
   home = {

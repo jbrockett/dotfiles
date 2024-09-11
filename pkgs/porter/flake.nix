@@ -47,8 +47,5 @@
           };
         }
       );
-
-      # Define default package for each system
-      defaultPackage = forAllSystems (system: self.packages.${system}.default);
     };
 }
