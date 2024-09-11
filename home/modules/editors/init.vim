@@ -1,7 +1,3 @@
-" Open NERDTree if no files were specified ** NOT WORKING **
-"autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
 " Basic settings
 set encoding=UTF-8
 set number                        " Show line numbers
@@ -32,7 +28,7 @@ set listchars+=trail:.            " show trailing spaces as dots
 set listchars+=extends:>          " The character to show in the last column when wrap is
                                   " off and the line continues beyond the right of the screen
 set listchars+=precedes:<         " The character to show in the last column when wrap is
-                                  " off and the line continues beyond the left of the screen
+                                    " off and the line continues beyond the left of the screen
 
 " Searching
 set hlsearch                      " highlight matches
@@ -42,14 +38,14 @@ set smartcase                     " ... unless they contain at least one capital
 
 " Status Bar
 if has("statusline") && !&cp
-  set laststatus=2                " always show the status bar
+    set laststatus=2                " always show the status bar
 
-  " Start the status line
-  set statusline=%f\ %m\ %r
-  set statusline+=Line:%l/%L[%p%%]
-  set statusline+=Col:%v
-  set statusline+=Buf:#%n
-  set statusline+=[%b][0x%B]
+    " Start the status line
+    set statusline=%f\ %m\ %r
+    set statusline+=Line:%l/%L[%p%%]
+    set statusline+=Col:%v
+    set statusline+=Buf:#%n
+    set statusline+=[%b][0x%B]
 endif
 
 " Mappings - Do not use same line comments, as it causes issues with the mappings
@@ -62,42 +58,3 @@ noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 " save as sudo
 cmap w!! w !sudo tee % >/dev/null
-
-" Add Plugins - vim-plug
-call plug#begin('~/.vim/plugged')
-
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-commentary'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'scrooloose/syntastic'
-Plug 'tpope/vim-eunuch'
-Plug 'altercation/vim-colors-solarized'
-
-" On-demand loading
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
-Plug 'ekalinin/Dockerfile.vim', {'for': 'Dockerfile'}
-Plug 'pearofducks/ansible-vim', {'for': 'ansible'}
-"Plug 'fatih/vim-go', { 'for': 'go' }
-Plug 'hashivim/vim-terraform', {'for': 'terraform'}
-
-call plug#end()
-
-" Plugin Settings
-let g:syntastic_shell = "/usr/local/bin/bash"
-let g:syntastic_enable_signs=1
-let g:syntastic_quiet_messages = {'level': 'warnings'}
-let g:syntastic_auto_loc_list=2
-let g:syntastic_ansible_checkers = ["ansible-lint"]
-"let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-"let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-"let g:go_fmt_fail_silently = 0
-let g:terraform_align=1
-
-" Solarized options
-"set background=dark
-"let g:solarized_visibility = "high"
-"let g:solarized_contrast = "high"
-"colorscheme solarized

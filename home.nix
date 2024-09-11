@@ -1,22 +1,28 @@
+{ lib, ... }:
+
+let
+  importAll = imports: lib.foldl' lib.concat [ ] (map import imports);
+in
 {
-  config,
-  pkgs,
-  ...
-}: {
+  imports = importAll [
+    ./home/modules/cli
+    ./home/modules/editors
+  ];
+
   home = {
-    homeDirectory =
-      if pkgs.stdenv.isLinux
-      then "/home/jeremy"
-      else "/Users/jeremy";
-
-    packages = with pkgs; [
-      bat
-      zsh
-    ];
-
-    stateVersion = "23.11";
     username = "jeremy";
+    homeDirectory = "/Users/jeremy";
+    stateVersion = "24.05";
   };
 
-  programs.home-manager.enable = true;
+  news.display = "silent";
+
+  nixpkgs.config = {
+    allowUnfree = true;
+    allowUnfreePredicate = _: true;
+  };
+
+  programs = {
+    home-manager.enable = true;
+  };
 }

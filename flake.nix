@@ -1,28 +1,25 @@
 {
+  description = "My Nix configuration";
+  
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # Package sources
+    nixpkgs.url = "nixpkgs/nixos-24.05";
+    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
     flake-utils = {
       url = "github:numtide/flake-utils";
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = {
-    nixpkgs,
-    flake-utils,
-    home-manager,
-    ...
-  }: let
+  outputs = { self, nixpkgs, nixpkgs-unstable, flake-utils, home-manager, ... }: 
+  let
     supportedSystems = [
       "aarch64-darwin"
-      "aarch64-linux"
-      "x86_64-linux"
-      "x86_64-darwin"
     ];
   in
     flake-utils.lib.eachSystem supportedSystems (
