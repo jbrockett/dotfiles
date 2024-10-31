@@ -44,6 +44,6 @@ stdenv.mkDerivation {
     description = "Deploy your applications into your own cloud account";
     homepage = "https://github.com/porter-dev/porter";
     license = licenses.mit;
-    platforms = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
+    platforms = builtins.attrNames platforms;
   };
 }
