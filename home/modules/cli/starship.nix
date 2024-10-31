@@ -44,5 +44,3 @@
     };
   };
 }
-
-# You can delete the starship.toml file after this change

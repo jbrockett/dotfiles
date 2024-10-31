@@ -18,14 +18,17 @@
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let
-      porterVersion = "0.56.7";  # Add version variable
-      system = "aarch64-darwin";  # Add system definition
-      pkgs = nixpkgs.legacyPackages.${system};  # Create pkgs
+      porterVersion = "0.56.7";
+      system = "aarch64-darwin";
+      pkgs = import nixpkgs {  # Modified this line
+        inherit system;
+        overlays = overlays;  # Added this line
+      };
       
       overlays = [
         (final: prev: {
           porter = final.callPackage ./pkgs/porter { 
-            version = porterVersion;  # Pass the version here
+            version = porterVersion;
           };
         })
       ];
@@ -35,7 +38,12 @@
         inherit pkgs;
         modules = [
           ./home.nix
-          { nixpkgs.overlays = overlays; }
+          {
+            nixpkgs = {
+              overlays = overlays;
+              config.allowUnfree = true;
+            };
+          }
         ];
       };
 
