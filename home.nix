@@ -1,7 +1,7 @@
 { lib, pkgs, ... }:
 
 let
-  importAll = imports: lib.foldl' lib.concat [ ] (map import imports);
+  importAll = paths: builtins.concatMap import paths;
 in
 {
   imports = importAll [
@@ -22,10 +22,22 @@ in
 
   nixpkgs.config = {
     allowUnfree = true;
-    allowUnfreePredicate = _: true;
   };
 
   programs = {
     home-manager.enable = true;
+  };
+
+  nix = {
+    settings = {
+      auto-optimise-store = true;
+      experimental-features = ["nix-command" "flakes"];
+    };
+    gc = {
+      automatic = true;
+      frequency = "weekly";
+      options = "--delete-older-than 30d";
+    };
+    package = pkgs.nix;
   };
 }

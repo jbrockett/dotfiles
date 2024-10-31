@@ -1,27 +1,34 @@
-{ lib, stdenv, fetchurl }:
+{ lib, stdenv, fetchurl, version }:
 
 let
-  version = "0.55.8";
-  system = stdenv.hostPlatform.system;
-  url = {
-    "x86_64-linux" = "https://github.com/porter-dev/releases/releases/download/v${version}/porter_${version}_linux_amd64";
-    "aarch64-linux" = "https://github.com/porter-dev/releases/releases/download/v${version}/porter_${version}_linux_arm64";
-    "x86_64-darwin" = "https://github.com/porter-dev/releases/releases/download/v${version}/porter_${version}_darwin_amd64";
-    "aarch64-darwin" = "https://github.com/porter-dev/releases/releases/download/v${version}/porter_${version}_darwin_arm64";
-  }.${system} or (throw "Unsupported system: ${system}");
-  sha256 = {
-    "x86_64-linux" = "5d9810c41a3364742c73772c4f424f147f588e4a1b0e067f1fcd0b5e6a57129c";
-    "aarch64-linux" = "03ee271d5205fac20dd9759ba477a81fd31fa23db2aab41526030ae6ee16360a";
-    "x86_64-darwin" = "e8660f5284c516a2c156e3bff4491bf35ef1f2266625b86e2738eea1666098ae";
-    "aarch64-darwin" = "a2aa08a0d4ce068b9590e176be908834d9ae4e113c92e26821aa38d096a6ada1";
-  }.${system} or (throw "Unsupported system: ${system}");
+  platforms = {
+    x86_64-linux = {
+      url = "https://github.com/porter-dev/releases/releases/download/v${version}/porter_${version}_linux_amd64";
+      sha256 = "7ffb46604032d4b2ee09b1633af69fba1c5fd7f0aeba7f4898c13bb487127d7d";
+    };
+    aarch64-linux = {
+      url = "https://github.com/porter-dev/releases/releases/download/v${version}/porter_${version}_linux_arm64";
+      sha256 = "6ff0591e7984eb57dafa70c47949f13d0844237bcbec62ac9ac4bea24868f9fe";
+    };
+    x86_64-darwin = {
+      url = "https://github.com/porter-dev/releases/releases/download/v${version}/porter_${version}_darwin_amd64";
+      sha256 = "115be7050fe8d678af7822e9eae8a670988e3817512db5b6b4ad168e478d5f72";
+    };
+    aarch64-darwin = {
+      url = "https://github.com/porter-dev/releases/releases/download/v${version}/porter_${version}_darwin_arm64";
+      sha256 = "6d13ee1f608a989c1ee0d47cf15f3de2fa182ce1ebfec7bf3509a042bdfe0347";
+    };
+    # Add other platforms as needed
+  };
+
+  platform = platforms.${stdenv.hostPlatform.system} or (throw "Unsupported platform");
 in
 stdenv.mkDerivation {
   pname = "porter";
   inherit version;
 
   src = fetchurl {
-    inherit url sha256;
+    inherit (platform) url sha256;
   };
 
   dontUnpack = true;
