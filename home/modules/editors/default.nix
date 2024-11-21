@@ -1,3 +1,7 @@
-[
-  ./nvim.nix
-]
+{ pkgs, lib, ... }:
+
+{
+  imports = [
+    ./nvim.nix
+  ];
+}
