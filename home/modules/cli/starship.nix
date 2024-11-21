@@ -4,7 +4,7 @@
   programs.starship = {
     enable = true;
     settings = {
-      format = "$directory$sudo$git_branch$git_status$git_metrics$fill$cmd_duration\n$character";
+      format = "$directory$sudo$git_branch$git_status$git_metrics$fill$aws$cmd_duration\n$character";
       add_newline = true;
 
       character = {
@@ -40,6 +40,13 @@
         disabled = false;
         impure_msg = "devbox";
         format = "via [$symbol$state](bold blue) ";
+      };
+
+      aws = {
+        format = "[$symbol($profile )(\($region\) )]($style)";
+        symbol = "☁️ ";
+        style = "bold yellow";
+        disabled = false;
       };
     };
   };

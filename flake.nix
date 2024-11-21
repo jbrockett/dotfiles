@@ -18,11 +18,11 @@
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let
-      porterVersion = "0.56.7";
+      porterVersion = "0.57.0";
       system = "aarch64-darwin";
-      pkgs = import nixpkgs {  # Modified this line
+      pkgs = import nixpkgs {
         inherit system;
-        overlays = overlays;  # Added this line
+        overlays = overlays;
       };
       
       overlays = [
@@ -34,21 +34,36 @@
       ];
     in
     {
-      homeConfigurations.jeremy = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [
-          ./home.nix
-          {
-            nixpkgs = {
-              overlays = overlays;
-              config.allowUnfree = true;
-            };
-          }
-        ];
+      homeConfigurations = {
+        "jeremy" = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [
+            ./hosts/personal
+            {
+              nixpkgs = {
+                overlays = overlays;
+                config.allowUnfree = true;
+              };
+            }
+          ];
+        };
+        
+        "jbrockett" = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [
+            ./hosts/work
+            {
+              nixpkgs = {
+                overlays = overlays;
+                config.allowUnfree = true;
+              };
+            }
+          ];
+        };
       };
 
-      # Add development shell
-      devShells.aarch64-darwin.default = pkgs.mkShell {
+      # Development shell configuration remains the same
+      devShells.${system}.default = pkgs.mkShell {
         buildInputs = with pkgs; [
           nil
           alejandra
