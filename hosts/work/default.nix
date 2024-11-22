@@ -4,7 +4,7 @@
   imports = [ ../../home/shared.nix ];
 
   home = {
-    username = "jbrockett";
+    username = "jeremybrockett";
     homeDirectory = "/Users/jbrockett";
     stateVersion = "24.05";
     packages = with pkgs; [
