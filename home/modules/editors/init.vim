@@ -28,7 +28,7 @@ set listchars+=trail:.            " show trailing spaces as dots
 set listchars+=extends:>          " The character to show in the last column when wrap is
                                   " off and the line continues beyond the right of the screen
 set listchars+=precedes:<         " The character to show in the last column when wrap is
-                                    " off and the line continues beyond the left of the screen
+                                  " off and the line continues beyond the left of the screen
 
 " Searching
 set hlsearch                      " highlight matches
@@ -38,7 +38,7 @@ set smartcase                     " ... unless they contain at least one capital
 
 " Status Bar
 if has("statusline") && !&cp
-    set laststatus=2                " always show the status bar
+    set laststatus=2              " always show the status bar
 
     " Start the status line
     set statusline=%f\ %m\ %r

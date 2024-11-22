@@ -16,60 +16,63 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, flake-utils, ... }@inputs:
     let
       porterVersion = "0.57.0";
-      system = "aarch64-darwin";
-      pkgs = import nixpkgs {
-        inherit system;
-        overlays = overlays;
-      };
       
-      overlays = [
-        (final: prev: {
-          porter = final.callPackage ./pkgs/porter { 
-            version = porterVersion;
-          };
-        })
-      ];
-    in
-    {
-      homeConfigurations = {
-        "jeremy" = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [
-            ./hosts/personal
-            {
-              nixpkgs = {
-                overlays = overlays;
-                config.allowUnfree = true;
-              };
-            }
-          ];
+      # Create a function to generate the configuration for any system
+      mkConfig = system: let
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = overlays;
         };
         
-        "jbrockett" = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [
-            ./hosts/work
-            {
-              nixpkgs = {
-                overlays = overlays;
-                config.allowUnfree = true;
-              };
-            }
-          ];
+        overlays = [
+          (final: prev: {
+            porter = final.callPackage ./pkgs/porter { 
+              version = porterVersion;
+            };
+          })
+        ];
+      in {
+        homeConfigurations = {
+          "jeremy" = home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
+            modules = [
+              ./hosts/personal
+              {
+                nixpkgs = {
+                  overlays = overlays;
+                  config.allowUnfree = true;
+                };
+              }
+            ];
+          };
+          
+          "jeremybrockett" = home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
+            modules = [
+              ./hosts/gloo
+              {
+                nixpkgs = {
+                  overlays = overlays;
+                  config.allowUnfree = true;
+                };
+              }
+            ];
+          };
         };
       };
-
-      # Development shell configuration remains the same
-      devShells.${system}.default = pkgs.mkShell {
-        buildInputs = with pkgs; [
+    in
+    (mkConfig "aarch64-darwin") // 
+    flake-utils.lib.eachDefaultSystem (system: {
+      devShells.default = (import nixpkgs { inherit system; }).mkShell {
+        buildInputs = with (import nixpkgs { inherit system; }); [
           nil
           alejandra
           nixfmt
           statix
         ];
       };
-    };
+    });
 }
