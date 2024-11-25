@@ -27,7 +27,7 @@
       };
     in {
       homeConfigurations = {
-        "jeremy@${system}" = home-manager.lib.homeManagerConfiguration {
+        "jeremy" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
             ./hosts/personal
@@ -37,7 +37,7 @@
           ];
         };
         
-        "jeremybrockett@${system}" = home-manager.lib.homeManagerConfiguration {
+        "jeremybrockett" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
             ./hosts/gloo

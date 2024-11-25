@@ -11,6 +11,9 @@
     stateVersion = "24.05";
     packages = with pkgs; [
       # Work-specific packages
+      porter
     ];
   };
+
+  home.enableNixpkgsReleaseCheck = false;
 }
