@@ -16,6 +16,7 @@ in
       docker-compose
       gh
       git
+      jetbrains-mono # JetBrains Mono Nerd Font for starship
       k9s
       kubectl
       kubectx
