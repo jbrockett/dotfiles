@@ -20,7 +20,7 @@
         overlays = [
           (final: prev: {
             porter = final.callPackage ./pkgs/porter { 
-              version = "0.57.0";
+              version = "0.57.3";
             };
           })
         ];
