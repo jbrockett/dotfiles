@@ -4,19 +4,19 @@ let
   platforms = {
     x86_64-linux = {
       url = "https://github.com/porter-dev/releases/releases/download/v${version}/porter_${version}_linux_amd64";
-      sha256 = "e1d30ba4931cdd4b387e2f6d1d15caec6e7cf421b4c212fbcb0e1fee3090aaa1";
+      sha256 = "cce69da069a282431712403b2bdddb296e1c8af29872cca99a603cf59417c93f";
     };
     aarch64-linux = {
       url = "https://github.com/porter-dev/releases/releases/download/v${version}/porter_${version}_linux_arm64";
-      sha256 = "37e4bcf5587deff395a7ce4c94404b070ff2eda38cfe34c2625d4e9860135390";
+      sha256 = "68b2852edbb0377a9a8e70f1e30b362d615e5618c0bbc9550e44a212858ab997";
     };
     x86_64-darwin = {
       url = "https://github.com/porter-dev/releases/releases/download/v${version}/porter_${version}_darwin_amd64";
-      sha256 = "e20c1bcc09cf1aea0ca6b73e6a12d7116950e98708b7395fc01a31e541613848";
+      sha256 = "91c45b2bfec9408c851a241cbc4f77d9645e6c703448de0d24be345c7b7c6fcd";
     };
     aarch64-darwin = {
       url = "https://github.com/porter-dev/releases/releases/download/v${version}/porter_${version}_darwin_arm64";
-      sha256 = "ccf0f4c3c33ee49594c5591c461f28c9970b7908b515ad4a2ca4b768a004a643";
+      sha256 = "c99eed8fbf66822d955d9f83d8242fa22c4acd02da781b0900e9eaac588b2a9e";
     };
   };
 

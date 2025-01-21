@@ -9,14 +9,7 @@ in
     ./home/modules/editors
   ];
 
-  home = {
-    username = "jeremy";
-    homeDirectory = "/Users/jeremy";
-    stateVersion = "24.05";
-    packages = with pkgs; [
-      porter
-    ];
-  };
+  home = {};
 
   news.display = "silent";
 
