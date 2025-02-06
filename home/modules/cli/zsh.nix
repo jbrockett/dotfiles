@@ -3,7 +3,7 @@
 {
   home.file.".zsh/completion/_docker".source = pkgs.fetchurl {
     url = "https://raw.githubusercontent.com/docker/cli/master/contrib/completion/zsh/_docker";
-    sha256 = "93dfeb5deebba490fcb9a24a9a623f5802dfa6b128536a3b97372740785e564a";
+    sha256 = "k9/rXe67pJD8uaJKmmI/WALfprEoU2o7lzcnQHheVko=";
   };
 
   programs.zsh = {
